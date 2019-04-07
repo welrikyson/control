@@ -25,5 +25,6 @@ public class Despesa {
     @Temporal(TemporalType.DATE)  
     private Date data;
     @Lob
-    private byte[] comprovante;        
+    private byte[] comprovante;  
+    private TipoDespesa tipoDespesa;     
 }

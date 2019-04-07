@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.stream.Stream;
 
 import com.control.controlapi.model.Despesa;
+import com.control.controlapi.model.TipoDespesa;
 import com.control.controlapi.service.DespesaRepository;
 
 import org.springframework.boot.ApplicationRunner;
@@ -27,6 +28,7 @@ public class DemoApplication {
                 despesa.setData(new Date());
                 despesa.setValor(100);
                 despesa.setDescricao(name);
+                despesa.setTipoDespesa(TipoDespesa.aluguel);
                 repository.save(despesa);
             });
             
