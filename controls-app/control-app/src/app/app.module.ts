@@ -10,6 +10,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DespesaService } from './despesa.service';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { DespesaService } from './despesa.service';
     BrowserModule,
     AppRoutingModule,
     NgbModule.forRoot(),
+    ChartsModule,
     FormsModule,
     HttpClientModule
   ],

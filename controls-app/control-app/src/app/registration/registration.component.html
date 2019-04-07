@@ -16,8 +16,7 @@
           <th scope="row">{{registration.id}}</th>
           <td>{{ registration.descricao }}</td>
           <td>{{ registration.valor }}</td>
-          <td>{{ registration.data }}</td>
-          <!-- <td>{{ registration.dob.day + '/' + registration.dob.month + '/' + registration.dob.year}}</td> -->
+          <td>{{ registration.data }}</td>          
           <td>
             <button type="button" class="btn btn-info" (click)="onEdit(i)">Edit</button>
           </td>
@@ -47,7 +46,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="dob-input" class="col-2 col-form-label">DOB</label>
+        <label for="dob-input" class="col-2 col-form-label">data</label>
         <div class="col-3 input-group">
           <input type="text" class="form-control" placeholder="yyyy-mm-dd" name="data" [(ngModel)]="newDespesa.data"
             ngbDatepicker #dob="ngbDatepicker">
@@ -56,15 +55,20 @@
           </button>
         </div>
       </div>
-
+      <div class="form-group row">
+        <label for="comprovate-input" class="col-2 col-form-label">comprovante</label>
+        <div class="col-10">
+          <input class="form-control" type="file" name="comprovante">
+        </div>
+      </div>
       <!-- <div class="form-group row">
         <label for="city-input" class="col-2 col-form-label">Country</label>
         <div class="col-10 dropdown" ngbDropdown myDrop="ngbDropdown">
           <button type="button" class="btn btn-outline-primary" id="dropdownManual" name="country"
             ngbDropdownToggle>{{newDespesa.country}}</button>
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
-            <button type="button" class="dropdown-item" *ngFor="let country of countries"
-              (click)="onChangeCountry(country)">{{country}}</button>
+            <button type="button" class="dropdown-item" *ngFor="let tipo of tipos"
+              (click)="onChangeCountry(country)">{{tipo}}</button>
           </div>
         </div>
       </div> -->
