@@ -16,7 +16,7 @@
           <th scope="row">{{registration.id}}</th>
           <td>{{ registration.descricao }}</td>
           <td>{{ registration.valor }}</td>
-          <td>{{ registration.data }}</td>          
+          <td>{{ registration.data | date:'dd/MM/yyyy'}}</td>          
           <td>
             <button type="button" class="btn btn-info" (click)="onEdit(i)">Edit</button>
           </td>
@@ -36,7 +36,7 @@
       <div class="form-group row">
         <label for="firstname-input" class="col-2 col-form-label">Descricao</label>
         <div class="col-10">
-          <input class="form-control" type="text" [(ngModel)]="newDespesa.descricao" name="firstName">
+          <input #descricao class="form-control" type="text" [(ngModel)]="newDespesa.descricao" name="firstName">
         </div>
       </div>
       <div class="form-group row">
@@ -48,17 +48,13 @@
       <div class="form-group row">
         <label for="dob-input" class="col-2 col-form-label">data</label>
         <div class="col-3 input-group">
-          <input type="text" class="form-control" placeholder="yyyy-mm-dd" name="data" [(ngModel)]="newDespesa.data"
-            ngbDatepicker #dob="ngbDatepicker">
-          <button class="input-group-addon" (click)="dob.toggle()" type="button">
-            <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
-          </button>
+          <input type="date" class="form-control" placeholder="yyyy-mm-dd" name="data" [(ngModel)]="newDespesa.data"/>          
         </div>
       </div>
       <div class="form-group row">
         <label for="comprovate-input" class="col-2 col-form-label">comprovante</label>
         <div class="col-10">
-          <input class="form-control" type="file" accept="image/x-png,image/gif,image/jpeg" name="comprovante">
+          <input class="form-control" type="file" accept="image/x-png,image/gif,image/jpeg" name="comprovante" #ComprovanteImg>
         </div>
       </div>
       <!-- <div class="form-group row">

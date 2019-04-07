@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DespesaService } from '../despesa.service';
 import { Despesa } from '../despesa';
 
@@ -15,6 +15,8 @@ export class RegistrationComponent implements OnInit {
   selectedRow: number;
   despesas: Despesa[];
   newDespesa: Despesa;
+
+  @ViewChild('ComprovanteImg') ComprovanteImg;
 
   constructor(private _despesaService: DespesaService) { }
 
@@ -38,14 +40,24 @@ export class RegistrationComponent implements OnInit {
   }
 
   // metodo ligado ao botao new
-  onNew() {    
+  @ViewChild("descricao") descricaoField : ElementRef;
+  onNew() {        
     this.newDespesa = new Despesa();    
     this.submitType = 'Save';    
-    this.showNew = true;
+    this.showNew = true;    
   }
 
   //metodo ligado ao botao de save
   onSave(){
+    const Image = this.ComprovanteImg.nativeElement;
+    if (Image.files && Image.files[0]) {
+      this.newDespesa.comprovante = Image.files[0];
+      console.log('nome do comprovante');
+      
+      console.log(this.newDespesa.comprovante.name);
+      
+    }
+    
     if(this.submitType === 'Save'){
       this._despesaService.addDespesa(this.newDespesa).subscribe(despesa => this.despesas.push(despesa));      
     }else{
@@ -66,6 +78,7 @@ export class RegistrationComponent implements OnInit {
     this.showNew = false;
   }
 
+  
   onEdit(index: number) {
     // Atualizar linha selecionada
     this.selectedRow = index;
@@ -76,6 +89,6 @@ export class RegistrationComponent implements OnInit {
     
     this.submitType = 'Update';
     
-    this.showNew = true;
-  }
+    this.showNew = true;    
+  }  
 }
