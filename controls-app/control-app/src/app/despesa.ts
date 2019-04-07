@@ -1,3 +1,4 @@
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 export class Despesa {
     constructor(
         public id?: number,

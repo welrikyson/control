@@ -20,7 +20,8 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     this._despesaService.getDespesas().subscribe(res => {
-      this.despesas = res;      
+      this.despesas = res;
+      console.log(this.despesas);           
     }, err => {
       console.log(err);      
     });
