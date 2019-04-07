@@ -1,6 +1,6 @@
 package com.control.controlapi;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.stream.Stream;
 
 import com.control.controlapi.model.Despesa;
@@ -20,15 +20,18 @@ public class DemoApplication {
 
     @Bean
     ApplicationRunner init(DespesaRepository repository) {
-        return args -> {
+        
+        return args -> {            
             Stream.of("Material", "Agua", "Luz", "Telefone").forEach(name -> {
-                Despesa despesa = new Despesa();
-                despesa.setData(LocalDate.now());
+                Despesa despesa = new Despesa();                
+                despesa.setData(new Date());
                 despesa.setValor(100);
                 despesa.setDescricao(name);
                 repository.save(despesa);
             });
+            
             repository.findAll().forEach(System.out::println);
+            
         };
     }
 }
