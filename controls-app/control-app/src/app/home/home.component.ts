@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { DespesaService } from '../despesa.service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit {
     responsive: true,
     legend: {
       position: 'top',
+      display: false,      
     },
     plugins: {
       datalabels: {
@@ -23,21 +25,30 @@ export class HomeComponent implements OnInit {
       },
     }
   };
-  public pieChartLabels: Label[] = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
-  public pieChartData: number[] = [300, 500, 100];
-  public pieChartType: ChartType = 'pie';
+  public pieChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  public pieChartData: number[] = [];
+  public pieChartType: ChartType = 'bar';
   public pieChartLegend = true;
   
   public pieChartColors = [
     {
-      backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
+      backgroundColor: ['#3e95cd','#3e95cd','#3e95cd','#3e95cd','#3e95cd','#3e95cd','#3e95cd','#3e95cd','#3e95cd','#3e95cd','#3e95cd','#3e95cd'],
     },
   ];
 
 
-  constructor() { }
+  constructor(private _despesaService: DespesaService) { }
 
   ngOnInit() {
+    this._despesaService.getDespesas().subscribe(despesas =>{
+      let meses: Array<number>= new Array<number>(12).fill(0);
+      despesas.forEach((d)=>{
+        let moth: number = new Date(d.data).getMonth();
+        meses[moth] = meses[moth] + d.valor;        
+      })           
+      this.pieChartData = meses;
+    })
+    
   }
 
 }

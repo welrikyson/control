@@ -24,6 +24,7 @@ public class DemoApplication {
             Stream.of("Material", "Agua", "Luz", "Telefone").forEach(name -> {
                 Despesa despesa = new Despesa();
                 despesa.setData(LocalDate.now());
+                despesa.setValor(100);
                 despesa.setDescricao(name);
                 repository.save(despesa);
             });
