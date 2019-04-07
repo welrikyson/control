@@ -25,8 +25,6 @@ export class DespesaService {
         catchError(this.handleError('getProdutos', []))
       );   
   }
-
-
   
   deleteDespesa (id: number): Observable<{}> {
     const url = `${apiUrl}/${id}`;
@@ -34,6 +32,22 @@ export class DespesaService {
       .pipe(
         catchError(this.handleError('deleteDespesa'))
       );
+  }
+
+  addDespesa (despesa : Despesa): Observable<Despesa> {
+    return this.http.post<Despesa>(apiUrl, despesa, httpOptions)
+    .pipe(
+      catchError(this.handleError('addDespesa', despesa))
+    );
+  }
+
+  updateDespesa(despesa): Observable<any> {
+    const id = despesa.id;
+    const url = `${apiUrl}/${id}`;
+    return this.http.put(url, despesa, httpOptions).pipe(
+      tap(_ => console.log(`atualiza o produco com id=${id}`)),
+      catchError(this.handleError<any>('updateProduto'))
+    );
   }
 
   //intercepta os erros caso ocorra

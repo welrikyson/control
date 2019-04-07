@@ -37,13 +37,13 @@
       <div class="form-group row">
         <label for="firstname-input" class="col-2 col-form-label">Descricao</label>
         <div class="col-10">
-          <input class="form-control" type="text" [(ngModel)]="regModel.descricao" name="firstName">
+          <input class="form-control" type="text" [(ngModel)]="newDespesa.descricao" name="firstName">
         </div>
       </div>
       <div class="form-group row">
         <label for="lastname-input" class="col-2 col-form-label">valor</label>
         <div class="col-10">
-          <input class="form-control" type="number" [(ngModel)]="regModel.valor" name="lastName">
+          <input class="form-control" type="number" [(ngModel)]="newDespesa.valor" name="lastName">
         </div>
       </div>
       <!-- <div class="form-group row">
@@ -57,17 +57,17 @@
         </div>
       </div>     -->
       
-      <div class="form-group row">
+      <!-- <div class="form-group row">
         <label for="city-input" class="col-2 col-form-label">Country</label>
         <div class="col-10 dropdown" ngbDropdown myDrop="ngbDropdown">
           <button type="button" class="btn btn-outline-primary" id="dropdownManual" name="country"
-            ngbDropdownToggle>{{regModel.country}}</button>
+            ngbDropdownToggle>{{newDespesa.country}}</button>
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
             <button type="button" class="dropdown-item" *ngFor="let country of countries"
               (click)="onChangeCountry(country)">{{country}}</button>
           </div>
         </div>
-      </div>
+      </div> -->
       <button type="submit" class="btn btn-success">{{submitType}}</button>
       <button type="submit" class="btn btn-primary" (click)="onCancel()">Cancel</button>
     </form>
