@@ -7,7 +7,7 @@
 * [Angular 7](https://angular.io/)
 * [H2 Database](http://www.h2database.com)
 * HTML
-* CSS]
+* CSS
 * JavaScript
 
 
