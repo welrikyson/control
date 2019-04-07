@@ -40,15 +40,14 @@ export class HomeComponent implements OnInit {
   constructor(private _despesaService: DespesaService) { }
 
   ngOnInit() {
-    this._despesaService.getDespesas().subscribe(despesas =>{
+    let currentYear:number = new Date().getFullYear();
+    this._despesaService.getDespesasByYear(currentYear).subscribe(despesas =>{
       let meses: Array<number>= new Array<number>(12).fill(0);
       despesas.forEach((d)=>{
         let moth: number = new Date(d.data).getMonth();
         meses[moth] = meses[moth] + d.valor;        
       })           
       this.pieChartData = meses;
-    })
-    
+    })    
   }
-
 }

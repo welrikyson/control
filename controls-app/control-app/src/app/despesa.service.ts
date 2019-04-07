@@ -3,9 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Despesa } from './despesa';
 import { Observable, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
+import { url } from 'inspector';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 const apiUrl = 'http://localhost:8080/despesas';
 
@@ -17,16 +18,16 @@ export class DespesaService {
   constructor(private http: HttpClient) { }
 
   //retornar todas as despesas
-  getDespesas (): Observable<Despesa[]> {
+  getDespesas(): Observable<Despesa[]> {
     return this.http.get<GetResponse>(apiUrl)
       .pipe(
         map(response => response._embedded.despesas),
         tap(produtos => console.log('leu as despesas')),
         catchError(this.handleError('getProdutos', []))
-      );   
+      );
   }
-  
-  deleteDespesa (id: number): Observable<{}> {
+
+  deleteDespesa(id: number): Observable<{}> {
     const url = `${apiUrl}/${id}`;
     return this.http.delete(url, httpOptions)
       .pipe(
@@ -34,11 +35,11 @@ export class DespesaService {
       );
   }
 
-  addDespesa (despesa : Despesa): Observable<Despesa> {
+  addDespesa(despesa: Despesa): Observable<Despesa> {
     return this.http.post<Despesa>(apiUrl, despesa, httpOptions)
-    .pipe(
-      catchError(this.handleError('addDespesa', despesa))
-    );
+      .pipe(
+        catchError(this.handleError('addDespesa', despesa))
+      );
   }
 
   updateDespesa(despesa): Observable<any> {
@@ -50,8 +51,20 @@ export class DespesaService {
     );
   }
 
+  getDespesasByYear(year: number): Observable<Despesa[]> {
+    const dateStart: string = `${year}-01-01`;
+    const dateEnd: string = `${year}-12-31`;
+    const url: string = `${apiUrl}/search/findAllByDataBetween/?dataStart=${dateStart}&dataEnd=${dateEnd}`;
+    return this.http.get<GetResponse>(url)
+      .pipe(
+        map(response => response._embedded.despesas),
+        tap(produtos => console.log('leu as despesas')),
+        catchError(this.handleError('getProdutos', []))
+      );
+  }
+
   //intercepta os erros caso ocorra
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       console.error(error);
@@ -64,6 +77,6 @@ export class DespesaService {
 interface GetResponse {
   _embedded: {
     despesas: Despesa[];
-    _links: {self: {href: string}};
+    _links: { self: { href: string } };
   };
 }
