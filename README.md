@@ -24,8 +24,8 @@ Isto vai fazer uma copia do projeto localmente. Para instalar e executar as apli
 Suba o servidor:
 
 ```bash
-cd controls-api
-mvnw spring-boot:run
+cd .\control-api\
+.\mvnw spring-boot:run
 ```
 
 Suba o cliente:
