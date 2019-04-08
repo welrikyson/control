@@ -73,6 +73,7 @@ export class RegistrationComponent implements OnInit {
         this.despesas[this.selectedRow].descricao = this.newDespesa.descricao;
         this.despesas[this.selectedRow].valor = this.newDespesa.valor;
         this.despesas[this.selectedRow].data = this.newDespesa.data;
+        this.despesas[this.selectedRow].tipoDespesa = this.newDespesa.tipoDespesa;
       });
     }
     // esconde seçao de registro.

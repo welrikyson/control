@@ -26,5 +26,5 @@ public class Despesa {
     private Date data;
     @Lob
     private byte[] comprovante;  
-    private TipoDespesa tipoDespesa;     
+    private String tipoDespesa;     
 }
