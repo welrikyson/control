@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DespesaService } from '../despesa.service';
 import { Despesa } from '../despesa';
+import { Tipo } from '../tipo.enum';
 
 @Component({
   selector: 'app-registration',
@@ -10,12 +11,13 @@ import { Despesa } from '../despesa';
 export class RegistrationComponent implements OnInit {
 
   submitType: string = 'Save';
-  showNew : boolean = false;
+  showNew: boolean = false;
   // linha selecionda na table
   selectedRow: number;
   despesas: Despesa[];
   newDespesa: Despesa;
 
+  tipos: string[] = ['aluguel', 'multa', 'imposto', 'conta', 'salário', 'outros'];
   @ViewChild('ComprovanteImg') ComprovanteImg;
 
   constructor(private _despesaService: DespesaService) { }
@@ -23,10 +25,39 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
     this._despesaService.getDespesas().subscribe(res => {
       this.despesas = res;
-      console.log(this.despesas);           
+      console.log(this.despesas);
     }, err => {
-      console.log(err);      
+      console.log(err);
     });
+  }
+
+  onChangeTipo(tipo: string) {
+    console.log(this.newDespesa.tipoDespesa);
+    switch (tipo) {
+      case 'aluguel':
+        this.newDespesa.tipoDespesa = Tipo.aluguel;
+        break;
+      case 'multa':
+        this.newDespesa.tipoDespesa = Tipo.multa;
+        break;
+      case 'imposto':
+        this.newDespesa.tipoDespesa = Tipo.imposto;
+        break;
+      case 'conta':
+        this.newDespesa.tipoDespesa = Tipo.conta;
+        break;
+      case 'salário':
+        this.newDespesa.tipoDespesa = Tipo.salario;
+        break;
+      case 'outros':
+        this.newDespesa.tipoDespesa = Tipo.outros;
+        break;
+      default:
+        break;
+        
+        
+    }
+
   }
 
   // metodo ligado ao botao delete
@@ -40,34 +71,34 @@ export class RegistrationComponent implements OnInit {
   }
 
   // metodo ligado ao botao new
-  @ViewChild("descricao") descricaoField : ElementRef;
-  onNew() {        
-    this.newDespesa = new Despesa();    
-    this.submitType = 'Save';    
-    this.showNew = true;    
+  @ViewChild("descricao") descricaoField: ElementRef;
+  onNew() {
+    this.newDespesa = new Despesa();
+    this.submitType = 'Save';
+    this.showNew = true;
   }
 
   //metodo ligado ao botao de save
-  onSave(){
+  onSave() {
     const Image = this.ComprovanteImg.nativeElement;
     if (Image.files && Image.files[0]) {
       this.newDespesa.comprovante = Image.files[0];
       console.log('nome do comprovante');
-      
+
       console.log(this.newDespesa.comprovante.name);
-      
+
     }
-    
-    if(this.submitType === 'Save'){
-      this._despesaService.addDespesa(this.newDespesa).subscribe(despesa => this.despesas.push(despesa));      
-    }else{
-      this._despesaService.updateDespesa(this.newDespesa).subscribe(()=>{
+
+    if (this.submitType === 'Save') {
+      this._despesaService.addDespesa(this.newDespesa).subscribe(despesa => this.despesas.push(despesa));
+    } else {
+      this._despesaService.updateDespesa(this.newDespesa).subscribe(() => {
 
         this.despesas[this.selectedRow].descricao = this.newDespesa.descricao;
         this.despesas[this.selectedRow].valor = this.newDespesa.valor;
-        this.despesas[this.selectedRow].data = this.newDespesa.data;      
+        this.despesas[this.selectedRow].data = this.newDespesa.data;
       });
-    }   
+    }
     // esconde seçao de registro.
     this.showNew = false;
   }
@@ -78,17 +109,17 @@ export class RegistrationComponent implements OnInit {
     this.showNew = false;
   }
 
-  
+
   onEdit(index: number) {
     // Atualizar linha selecionada
     this.selectedRow = index;
-    
+
     this.newDespesa = new Despesa();
     //clonar
-    this.newDespesa = Object.assign({}, this.despesas[this.selectedRow]);    
-    
+    this.newDespesa = Object.assign({}, this.despesas[this.selectedRow]);
+
     this.submitType = 'Update';
-    
-    this.showNew = true;    
-  }  
+
+    this.showNew = true;
+  }
 }

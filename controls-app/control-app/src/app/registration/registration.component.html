@@ -6,6 +6,7 @@
           <th>ID</th>
           <th>Descrição</th>
           <th>Valor</th>
+          <th>Tipo</th>
           <th>Data</th>
           <th></th>
           <th></th>
@@ -16,7 +17,8 @@
           <th scope="row">{{registration.id}}</th>
           <td>{{ registration.descricao }}</td>
           <td>{{ registration.valor }}</td>
-          <td>{{ registration.data | date:'dd/MM/yyyy'}}</td>          
+          <td>{{ registration.tipoDespesa }}</td>
+          <td>{{ registration.data | date:'dd/MM/yyyy'}}</td>                     
           <td>
             <button type="button" class="btn btn-info" (click)="onEdit(i)">Edit</button>
           </td>
@@ -57,17 +59,17 @@
           <input class="form-control" type="file" accept="image/x-png,image/gif,image/jpeg" name="comprovante" #ComprovanteImg>
         </div>
       </div>
-      <!-- <div class="form-group row">
-        <label for="city-input" class="col-2 col-form-label">Country</label>
+      <div class="form-group row">
+        <label for="city-input" class="col-2 col-form-label">Tipo</label>
         <div class="col-10 dropdown" ngbDropdown myDrop="ngbDropdown">
           <button type="button" class="btn btn-outline-primary" id="dropdownManual" name="country"
-            ngbDropdownToggle>{{newDespesa.country}}</button>
+            ngbDropdownToggle>{{newDespesa.tipoDespesa}}</button>
           <div ngbDropdownMenu aria-labelledby="dropdownManual">
-            <button type="button" class="dropdown-item" *ngFor="let tipo of tipos"
-              (click)="onChangeCountry(country)">{{tipo}}</button>
+            <button type="button" class="dropdown-item" *ngFor="let tipo of tipos" 
+              (click)="onChangeTipo(tipo)">{{tipo}}</button>
           </div>
         </div>
-      </div> -->
+      </div>
       <button type="submit" class="btn btn-success">{{submitType}}</button>
       <button type="submit" class="btn btn-primary" (click)="onCancel()">Cancel</button>
     </form>
