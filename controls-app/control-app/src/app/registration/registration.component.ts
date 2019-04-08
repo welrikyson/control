@@ -33,31 +33,7 @@ export class RegistrationComponent implements OnInit {
 
   onChangeTipo(tipo: string) {
     console.log(this.newDespesa.tipoDespesa);
-    switch (tipo) {
-      case 'aluguel':
-        this.newDespesa.tipoDespesa = Tipo.aluguel;
-        break;
-      case 'multa':
-        this.newDespesa.tipoDespesa = Tipo.multa;
-        break;
-      case 'imposto':
-        this.newDespesa.tipoDespesa = Tipo.imposto;
-        break;
-      case 'conta':
-        this.newDespesa.tipoDespesa = Tipo.conta;
-        break;
-      case 'salário':
-        this.newDespesa.tipoDespesa = Tipo.salario;
-        break;
-      case 'outros':
-        this.newDespesa.tipoDespesa = Tipo.outros;
-        break;
-      default:
-        break;
-        
-        
-    }
-
+    this.newDespesa.tipoDespesa = tipo;
   }
 
   // metodo ligado ao botao delete

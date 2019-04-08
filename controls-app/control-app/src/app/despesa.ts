@@ -7,6 +7,6 @@ export class Despesa {
         public valor: number = 0,
         public data: Date = new Date(),
         public comprovante?: File,
-        public tipoDespesa?: Tipo
+        public tipoDespesa: string = 'selecione tipo'
     ) { }
 }
