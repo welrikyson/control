@@ -30,6 +30,16 @@ public class DemoApplication {
                 despesa.setTipoDespesa("conta");
                 repository.save(despesa);
             });
+
+            Stream.of("Carro", "Escritório").forEach(name -> {
+                Despesa despesa = new Despesa();                
+                despesa.setData(new Date());
+                despesa.getData().setMonth(5);
+                despesa.setValor(1000);
+                despesa.setDescricao(name);
+                despesa.setTipoDespesa("aluguel");
+                repository.save(despesa);
+            });
             
             repository.findAll().forEach(System.out::println);
             
