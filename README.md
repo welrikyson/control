@@ -28,11 +28,10 @@ cd .\control-api\
 .\mvnw spring-boot:run
 ```
 
-Suba o cliente:
+Em outro terminal, Suba o cliente:
 
 ```bash
-cd .. && cd controls-app
-cd control-app
+cd .\control\controls-app\control-app\
 npm install && npm start
 ```
 Para acessar a api: [http://Localhost:8080](http://Localhost:4200)
